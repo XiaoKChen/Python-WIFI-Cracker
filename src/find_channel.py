@@ -1,11 +1,11 @@
 #!/usr/bin/python3'
-import sys
-sys.path.append('../wifi_data')
-
 import subprocess
 import csv
 
+
 def findChannel(BSSID):
+    cleanData()
+
     dataList = []
 
     airodump = 'sudo -S timeout 1 airodump-ng -w ./wifi_data/WifiData --output-format csv wlan0'.split()
@@ -15,8 +15,6 @@ def findChannel(BSSID):
 
     editData = open('./wifi_data/WifiData.csv', 'r')
     editData_reader = csv.DictReader(editData)
-
-    cleanData()
 
     for data in editData_reader:
         if data['BSSID'] == BSSID:
